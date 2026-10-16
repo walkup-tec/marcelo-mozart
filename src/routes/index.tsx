@@ -140,7 +140,7 @@ function Index() {
             <p className="reveal font-display text-sm font-bold tracking-[0.25em] text-ink-muted">MARCELO MOZART</p>
             <h1 className="reveal mt-6 max-w-4xl text-4xl font-extrabold leading-[1.08] md:text-6xl">
               Gestor de Tráfego Pago Sênior
-              <span className="block text-ink-muted">Especialista em Meta Ads</span>
+              <span className="mt-3 block w-fit highlight-ink">Especialista em Meta Ads</span>
             </h1>
             <p className="reveal mt-8 max-w-2xl text-lg leading-relaxed text-ink-foreground/85">
               Atuo com marketing digital desde 2006 e com Meta Ads desde 2018, apoiando operações de aquisição de leads por meio de planejamento, execução, acompanhamento e otimização de campanhas.

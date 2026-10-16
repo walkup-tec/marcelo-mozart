@@ -34,6 +34,7 @@
   --color-ink-foreground: var(--ink-foreground);
   --color-ink-muted: var(--ink-muted);
   --color-ink-border: var(--ink-border);
+  --color-ink-accent: var(--ink-accent);
 }
 
 :root {
@@ -61,6 +62,8 @@
   --ink-foreground: oklch(0.96 0.005 85);
   --ink-muted: oklch(0.72 0.015 255);
   --ink-border: oklch(1 0 0 / 12%);
+  --ink-accent: oklch(0.8 0.11 220);
+  --ink-accent-soft: oklch(0.7 0.11 220 / 32%);
 }
 
 @layer base {
@@ -94,6 +97,13 @@
     linear-gradient(var(--ink-border) 1px, transparent 1px),
     linear-gradient(90deg, var(--ink-border) 1px, transparent 1px);
   background-size: 64px 64px;
+}
+
+@utility highlight-ink {
+  color: var(--color-ink-accent);
+  background-image: linear-gradient(to top, var(--ink-accent-soft) 0.3em, transparent 0.3em);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 @utility reveal {
