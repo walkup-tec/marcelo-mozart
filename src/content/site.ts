@@ -87,10 +87,11 @@ export type CaseStudy = {
   clientLogo?: string | null;
   /** Segmento ou tipo de operação, ex.: "Produtos financeiros e crédito". */
   segment?: string;
-  objective?: string;
+  /** Estratégia da campanha, ex.: "Leads via WhatsApp · Otimização de CPA". */
   strategy?: string;
-  activities?: string[];
+  /** Resultado exibido no card, ex.: "Investimento diário de R$ 20,00 com 40 leads por dia." */
   results?: string;
+
   /** Prints do gerenciador de anúncios. Só entram com autorização do cliente e com dados internos mascarados. */
   prints: CasePrint[];
 };
