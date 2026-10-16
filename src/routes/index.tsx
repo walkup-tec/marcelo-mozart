@@ -3,8 +3,10 @@ import { useEffect, useState, type ReactNode } from "react";
 import {
   NAV, TIMELINE, SKILLS, METRICS, SEGMENTS, CASE_STUDIES, EDUCATION, PARTNERSHIPS,
   PARTNERSHIP_INFO, CERTIFICATIONS, whatsappUrl, EMAIL, LINKEDIN, PHONE_DISPLAY, PHOTO_URL, RESUME_URL,
-  type CasePrint,
+  type CasePrint, type CaseStudy,
 } from "@/content/site";
+import { Button } from "@/components/ui/button";
+
 
 const TITLE = "Marcelo Mozart | Gestor de Tráfego Pago Sênior — Meta Ads";
 const DESC =
@@ -124,47 +126,82 @@ function Header() {
 }
 
 /** Galeria de prints do gerenciador de anúncios: miniatura + ampliação em modal. */
-function PrintGallery({ prints, client }: { prints: CasePrint[]; client: string }) {
-  const [open, setOpen] = useState<CasePrint | null>(null);
+function CaseCard({ study }: { study: CaseStudy }) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(null); };
+    if (openIndex === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenIndex(null);
+      if (e.key === "ArrowRight") setOpenIndex((i) => (i === null ? i : (i + 1) % study.prints.length));
+      if (e.key === "ArrowLeft") setOpenIndex((i) => (i === null ? i : (i - 1 + study.prints.length) % study.prints.length));
+    };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
-
-  if (!prints.length) return null;
+  }, [openIndex, study.prints.length]);
 
   const alt = (p: CasePrint) =>
-    `Print do gerenciador de anúncios da Meta — ${client}${p.caption ? `: ${p.caption}` : ""}`;
+    `Print do gerenciador de anúncios da Meta — ${study.client}${p.caption ? `: ${p.caption}` : ""}`;
+
+  const current = openIndex === null ? undefined : study.prints[openIndex];
 
   return (
-    <div className="mt-6 space-y-4">
-      {prints.map((p) => (
-        <figure key={p.src} className="overflow-hidden rounded-lg border bg-secondary">
-          <button type="button" onClick={() => setOpen(p)} aria-label={`Ampliar print de ${client}`} className="relative block w-full cursor-zoom-in">
-            <span aria-hidden className="absolute right-3 top-3 rounded-full bg-ink/80 px-3 py-1 text-[11px] font-semibold text-ink-foreground md:hidden">ampliar</span>
-            <img src={p.src} alt={alt(p)} loading="lazy" className="w-full" />
-          </button>
-          {p.caption && <figcaption className="border-t px-4 py-2 text-xs text-muted-foreground">{p.caption}</figcaption>}
-        </figure>
-      ))}
-      {open && (
-        <div role="dialog" aria-modal="true" aria-label={`Print ampliado — ${client}`} onClick={() => setOpen(null)} className="fixed inset-0 z-[70] flex items-center justify-center bg-ink/95 p-4">
-          <button type="button" onClick={() => setOpen(null)} aria-label="Fechar imagem ampliada" className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-ink-border text-2xl text-ink-foreground">
+
+    <article className="rounded-lg border bg-card p-6 md:p-7">
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0">
+          <div className="flex items-center gap-4">
+            {study.clientLogo && (
+              <img src={study.clientLogo} alt={`Logo ${study.client}`} className="h-12 w-auto shrink-0 object-contain" />
+            )}
+            <div>
+              {study.segment && <p className="eyebrow">{study.segment}</p>}
+              <h3 className="mt-1 text-lg font-bold">{study.client}</h3>
+            </div>
+          </div>
+          {study.strategy && (
+            <p className="mt-3 text-sm text-muted-foreground">
+              <strong className="font-semibold text-foreground">Estratégia:</strong> {study.strategy}
+            </p>
+          )}
+          {study.results && (
+            <p className="mt-1 text-sm text-muted-foreground">
+              <strong className="font-semibold text-foreground">Resultado:</strong> {study.results}
+            </p>
+          )}
+        </div>
+        {study.prints.length > 0 && (
+          <Button type="button" variant="outline" onClick={() => setOpenIndex(0)} className="shrink-0 self-start sm:self-center">
+            Ver indicadores da campanha
+          </Button>
+        )}
+      </div>
+      {current && (
+        <div role="dialog" aria-modal="true" aria-label={`Indicadores da campanha — ${study.client}`} onClick={() => setOpenIndex(null)} className="fixed inset-0 z-[70] flex items-center justify-center bg-ink/95 p-4">
+          <button type="button" onClick={() => setOpenIndex(null)} aria-label="Fechar indicadores da campanha" className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-ink-border text-2xl text-ink-foreground">
             &times;
           </button>
           <figure onClick={(e) => e.stopPropagation()} className="max-h-full w-full max-w-5xl overflow-auto text-center">
-            <img src={open.src} alt={alt(open)} className="mx-auto block max-h-[85vh] min-w-[700px] rounded-lg bg-background object-contain md:min-w-0" />
+            <img src={current.src} alt={alt(current)} className="mx-auto block max-h-[85vh] min-w-[1400px] rounded-lg bg-background object-contain md:min-w-0" />
             <p aria-hidden className="mt-2 text-xs text-ink-muted md:hidden">Arraste para percorrer o print</p>
-            {open.caption && <figcaption className="mt-3 text-sm text-ink-muted">{open.caption}</figcaption>}
+            {current.caption && (
+              <figcaption className="mt-3 text-sm text-ink-muted">{current.caption}</figcaption>
+            )}
+
+            {study.prints.length > 1 && (
+              <div className="mt-4 flex items-center justify-center gap-4">
+                <button type="button" onClick={() => setOpenIndex((i) => (i === null ? i : (i - 1 + study.prints.length) % study.prints.length))} aria-label="Print anterior" className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-border text-xl text-ink-foreground">&lsaquo;</button>
+                <span className="text-xs text-ink-muted">{(openIndex ?? 0) + 1} de {study.prints.length}</span>
+                <button type="button" onClick={() => setOpenIndex((i) => (i === null ? i : (i + 1) % study.prints.length))} aria-label="Próximo print" className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-border text-xl text-ink-foreground">&rsaquo;</button>
+              </div>
+            )}
           </figure>
         </div>
       )}
-    </div>
+    </article>
   );
 }
+
 
 function Index() {
   const showPhoto = PHOTO_URL || import.meta.env.DEV;
@@ -278,29 +315,13 @@ function Index() {
             </ul>
           </div>
           {CASE_STUDIES.length > 0 && (
-            <div className="mt-12 space-y-6">
+            <div className="mt-12 space-y-4">
               {CASE_STUDIES.map((c, i) => (
-                <article key={`${c.client}-${i}`} className="rounded-lg border bg-card p-6 md:p-8">
-                  <header className="flex flex-wrap items-center gap-4">
-                    {c.clientLogo && (
-                      <img src={c.clientLogo} alt={`Logo ${c.client}`} className="h-16 w-auto rounded-md object-contain" />
-                    )}
-                    <div>
-                      {c.segment && <p className="eyebrow">{c.segment}</p>}
-                      <h3 className="mt-1 text-xl font-bold">{c.client}</h3>
-                    </div>
-                  </header>
-                  {c.objective && <p className="mt-4 max-w-3xl text-sm"><strong>Objetivo:</strong> {c.objective}</p>}
-                  {c.strategy && <p className="mt-2 max-w-3xl text-sm"><strong>Estratégia:</strong> {c.strategy}</p>}
-                  {!!c.activities?.length && (
-                    <ul className="mt-2 max-w-3xl list-disc pl-5 text-sm text-muted-foreground">{c.activities.map((a) => <li key={a}>{a}</li>)}</ul>
-                  )}
-                  {c.results && <p className="mt-3 max-w-3xl text-sm"><strong>Resultados:</strong> {c.results}</p>}
-                  <PrintGallery prints={c.prints} client={c.client} />
-                </article>
+                <CaseCard key={`${c.client}-${i}`} study={c} />
               ))}
             </div>
           )}
+
         </Section>
 
         {/* FORMAÇÃO */}
