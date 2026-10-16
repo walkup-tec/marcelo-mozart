@@ -93,21 +93,7 @@ export type CaseStudy = {
 };
 
 /** Adicione apenas cases autorizados pelo cliente. Lista vazia = seção oculta. */
-export const CASE_STUDIES: CaseStudy[] = [
-  {
-    client: "Cliente Teste",
-    clientLogo: "/_tmp/logo.png",
-    segment: "Produtos financeiros e crédito",
-    objective: "Geração de leads qualificados.",
-    strategy: "Segmentação por perfil e otimização por custo por lead.",
-    activities: ["Estruturação de campanhas", "Otimização contínua"],
-    results: "142 leads em 30 dias.",
-    prints: [
-      { src: "/_tmp/print1.png", caption: "Conjuntos de anúncios — 30 dias" },
-      { src: "/_tmp/print2.png", caption: "Resumo da conta" },
-    ],
-  },
-];
+export const CASE_STUDIES: CaseStudy[] = [];
 
 export const EDUCATION = [
   { kind: "Formação acadêmica", title: "Análise e Desenvolvimento de Sistemas para Web", institution: "Faculdade Uninove/SP", period: "2018 – 2019", status: "Ensino superior incompleto", verifyUrl: null as string | null },
