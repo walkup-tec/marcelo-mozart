@@ -69,16 +69,30 @@ export const METRICS = [
 
 export const SEGMENTS = ["Produtos financeiros e crédito", "Prestadores de serviços"];
 
-export type CaseStudy = {
-  segment: string;
-  objective: string;
-  strategy: string;
-  activities: string[];
-  results: string;
-  client?: string;
-  image?: string;
+/** Print do gerenciador de anúncios da Meta, com os indicadores da campanha. */
+export type CasePrint = {
+  /** URL ou import do arquivo da imagem. */
+  src: string;
+  /** Legenda curta sob o print, ex.: "Geração de leads — 30 dias". */
+  caption?: string;
 };
-/** Adicione apenas estudos de caso completos e autorizados. Lista vazia = seção oculta. */
+
+export type CaseStudy = {
+  /** Nome do cliente, exibido ao lado da logo. */
+  client: string;
+  /** Logo do cliente. Enquanto null, o espaço fica oculto. */
+  clientLogo?: string | null;
+  /** Segmento ou tipo de operação, ex.: "Produtos financeiros e crédito". */
+  segment?: string;
+  objective?: string;
+  strategy?: string;
+  activities?: string[];
+  results?: string;
+  /** Prints do gerenciador de anúncios. Só entram com autorização do cliente e com dados internos mascarados. */
+  prints: CasePrint[];
+};
+
+/** Adicione apenas cases autorizados pelo cliente. Lista vazia = seção oculta. */
 export const CASE_STUDIES: CaseStudy[] = [];
 
 export const EDUCATION = [
