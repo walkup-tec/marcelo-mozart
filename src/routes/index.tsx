@@ -276,24 +276,24 @@ function Index() {
             </ul>
           </div>
           {CASE_STUDIES.length > 0 && (
-            <div className="mt-12 grid gap-5 lg:grid-cols-2">
+            <div className="mt-12 space-y-6">
               {CASE_STUDIES.map((c, i) => (
-                <article key={`${c.client}-${i}`} className="rounded-lg border bg-card p-6">
+                <article key={`${c.client}-${i}`} className="rounded-lg border bg-card p-6 md:p-8">
                   <header className="flex flex-wrap items-center gap-4">
                     {c.clientLogo && (
-                      <img src={c.clientLogo} alt={`Logo ${c.client}`} className="h-12 w-auto max-w-[140px] object-contain" />
+                      <img src={c.clientLogo} alt={`Logo ${c.client}`} className="h-14 w-auto max-w-[160px] object-contain" />
                     )}
                     <div>
                       {c.segment && <p className="eyebrow">{c.segment}</p>}
-                      <h3 className="mt-1 text-lg font-bold">{c.client}</h3>
+                      <h3 className="mt-1 text-xl font-bold">{c.client}</h3>
                     </div>
                   </header>
-                  {c.objective && <p className="mt-4 text-sm"><strong>Objetivo:</strong> {c.objective}</p>}
-                  {c.strategy && <p className="mt-2 text-sm"><strong>Estratégia:</strong> {c.strategy}</p>}
+                  {c.objective && <p className="mt-4 max-w-3xl text-sm"><strong>Objetivo:</strong> {c.objective}</p>}
+                  {c.strategy && <p className="mt-2 max-w-3xl text-sm"><strong>Estratégia:</strong> {c.strategy}</p>}
                   {!!c.activities?.length && (
-                    <ul className="mt-2 list-disc pl-5 text-sm text-muted-foreground">{c.activities.map((a) => <li key={a}>{a}</li>)}</ul>
+                    <ul className="mt-2 max-w-3xl list-disc pl-5 text-sm text-muted-foreground">{c.activities.map((a) => <li key={a}>{a}</li>)}</ul>
                   )}
-                  {c.results && <p className="mt-3 text-sm"><strong>Resultados:</strong> {c.results}</p>}
+                  {c.results && <p className="mt-3 max-w-3xl text-sm"><strong>Resultados:</strong> {c.results}</p>}
                   <PrintGallery prints={c.prints} client={c.client} />
                 </article>
               ))}
