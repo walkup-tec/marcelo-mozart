@@ -156,23 +156,25 @@ function Index() {
 
         {/* SOBRE */}
         <Section id="sobre" eyebrow="Sobre" title="Experiência que conecta estratégia e execução">
-          <div className={`grid gap-12 ${showPhoto ? "md:grid-cols-[1fr_280px]" : ""}`}>
-            <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-muted-foreground">
+          <div className={showPhoto ? "md:grid md:grid-cols-[1fr_280px] md:gap-12" : ""}>
+            {showPhoto && (
+              <div className="float-left mb-4 mr-5 w-[42%] max-w-[160px] md:float-none md:order-2 md:mb-0 md:mr-0 md:w-full md:max-w-[280px]">
+                {PHOTO_URL ? (
+                  <img src={PHOTO_URL} alt="Marcelo Mozart" className="aspect-[4/5] w-full rounded-lg object-cover" />
+                ) : (
+                  <div className="flex aspect-[4/5] w-full items-center justify-center rounded-lg border-2 border-dashed bg-secondary p-3 text-center text-[10px] leading-tight text-muted-foreground md:p-6 md:text-sm">
+                    Foto temporária — aguardando fotografia oficial (visível apenas em desenvolvimento)
+                  </div>
+                )}
+              </div>
+            )}
+            <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-muted-foreground md:order-1">
               <p>Sou Marcelo Mozart, profissional de marketing digital com trajetória iniciada em 2006, quando atuava na implantação de operações de telemarketing integradas a ações de e-mail marketing.</p>
               <p>Desde 2018, trabalho com Meta Ads, desenvolvendo e gerenciando campanhas de mídia paga, especialmente para geração de leads.</p>
               <p>Minha experiência combina planejamento, execução operacional, acompanhamento de indicadores e organização de projetos.</p>
               <p>Atuo como prestador de serviços independente e busco parcerias com agências que precisam de um profissional experiente para integrar suas operações de tráfego pago.</p>
               <p className="pt-2 text-base text-foreground">Novo Hamburgo, RS · Atuação 100% remota</p>
             </div>
-            {showPhoto && (
-              PHOTO_URL ? (
-                <img src={PHOTO_URL} alt="Marcelo Mozart" className="aspect-[4/5] w-full max-w-[280px] rounded-lg object-cover" />
-              ) : (
-                <div className="flex aspect-[4/5] w-full max-w-[280px] items-center justify-center rounded-lg border-2 border-dashed bg-secondary p-6 text-center text-sm text-muted-foreground">
-                  Foto temporária — aguardando fotografia oficial (visível apenas em desenvolvimento)
-                </div>
-              )
-            )}
           </div>
         </Section>
 
