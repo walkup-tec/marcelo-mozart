@@ -63,7 +63,7 @@
   --ink-muted: oklch(0.72 0.015 255);
   --ink-border: oklch(1 0 0 / 12%);
   --ink-accent: oklch(0.8 0.11 220);
-  --ink-accent-soft: oklch(0.7 0.11 220 / 22%);
+  --ink-accent-soft: oklch(0.7 0.11 220 / 32%);
 }
 
 @layer base {
