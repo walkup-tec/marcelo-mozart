@@ -143,7 +143,10 @@ function CaseCard({ study }: { study: CaseStudy }) {
   const alt = (p: CasePrint) =>
     `Print do gerenciador de anúncios da Meta — ${study.client}${p.caption ? `: ${p.caption}` : ""}`;
 
+  const current = openIndex === null ? undefined : study.prints[openIndex];
+
   return (
+
     <article className="rounded-lg border bg-card p-6 md:p-7">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0">
@@ -173,21 +176,22 @@ function CaseCard({ study }: { study: CaseStudy }) {
           </Button>
         )}
       </div>
-      {openIndex !== null && (
+      {current && (
         <div role="dialog" aria-modal="true" aria-label={`Indicadores da campanha — ${study.client}`} onClick={() => setOpenIndex(null)} className="fixed inset-0 z-[70] flex items-center justify-center bg-ink/95 p-4">
           <button type="button" onClick={() => setOpenIndex(null)} aria-label="Fechar indicadores da campanha" className="absolute right-4 top-4 flex h-11 w-11 items-center justify-center rounded-full border border-ink-border text-2xl text-ink-foreground">
             &times;
           </button>
           <figure onClick={(e) => e.stopPropagation()} className="max-h-full w-full max-w-5xl overflow-auto text-center">
-            <img src={study.prints[openIndex].src} alt={alt(study.prints[openIndex])} className="mx-auto block max-h-[85vh] min-w-[700px] rounded-lg bg-background object-contain md:min-w-0" />
+            <img src={current.src} alt={alt(current)} className="mx-auto block max-h-[85vh] min-w-[700px] rounded-lg bg-background object-contain md:min-w-0" />
             <p aria-hidden className="mt-2 text-xs text-ink-muted md:hidden">Arraste para percorrer o print</p>
-            {study.prints[openIndex].caption && (
-              <figcaption className="mt-3 text-sm text-ink-muted">{study.prints[openIndex].caption}</figcaption>
+            {current.caption && (
+              <figcaption className="mt-3 text-sm text-ink-muted">{current.caption}</figcaption>
             )}
+
             {study.prints.length > 1 && (
               <div className="mt-4 flex items-center justify-center gap-4">
                 <button type="button" onClick={() => setOpenIndex((i) => (i === null ? i : (i - 1 + study.prints.length) % study.prints.length))} aria-label="Print anterior" className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-border text-xl text-ink-foreground">&lsaquo;</button>
-                <span className="text-xs text-ink-muted">{openIndex + 1} de {study.prints.length}</span>
+                <span className="text-xs text-ink-muted">{(openIndex ?? 0) + 1} de {study.prints.length}</span>
                 <button type="button" onClick={() => setOpenIndex((i) => (i === null ? i : (i + 1) % study.prints.length))} aria-label="Próximo print" className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-border text-xl text-ink-foreground">&rsaquo;</button>
               </div>
             )}
