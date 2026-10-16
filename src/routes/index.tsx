@@ -143,7 +143,8 @@ function PrintGallery({ prints, client }: { prints: CasePrint[]; client: string 
     <div className="mt-6 space-y-4">
       {prints.map((p) => (
         <figure key={p.src} className="overflow-hidden rounded-lg border bg-secondary">
-          <button type="button" onClick={() => setOpen(p)} aria-label={`Ampliar print de ${client}`} className="block w-full cursor-zoom-in">
+          <button type="button" onClick={() => setOpen(p)} aria-label={`Ampliar print de ${client}`} className="relative block w-full cursor-zoom-in">
+            <span aria-hidden className="absolute right-3 top-3 rounded-full bg-ink/80 px-3 py-1 text-[11px] font-semibold text-ink-foreground md:hidden">ampliar</span>
             <img src={p.src} alt={alt(p)} loading="lazy" className="w-full" />
           </button>
           {p.caption && <figcaption className="border-t px-4 py-2 text-xs text-muted-foreground">{p.caption}</figcaption>}
@@ -155,7 +156,8 @@ function PrintGallery({ prints, client }: { prints: CasePrint[]; client: string 
             &times;
           </button>
           <figure onClick={(e) => e.stopPropagation()} className="max-h-full w-full max-w-5xl overflow-auto text-center">
-            <img src={open.src} alt={alt(open)} className="mx-auto max-h-[85vh] rounded-lg bg-background object-contain" />
+            <img src={open.src} alt={alt(open)} className="mx-auto block max-h-[85vh] min-w-[700px] rounded-lg bg-background object-contain md:min-w-0" />
+            <p aria-hidden className="mt-2 text-xs text-ink-muted md:hidden">Arraste para percorrer o print</p>
             {open.caption && <figcaption className="mt-3 text-sm text-ink-muted">{open.caption}</figcaption>}
           </figure>
         </div>
@@ -281,7 +283,7 @@ function Index() {
                 <article key={`${c.client}-${i}`} className="rounded-lg border bg-card p-6 md:p-8">
                   <header className="flex flex-wrap items-center gap-4">
                     {c.clientLogo && (
-                      <img src={c.clientLogo} alt={`Logo ${c.client}`} className="h-14 w-auto max-w-[160px] object-contain" />
+                      <img src={c.clientLogo} alt={`Logo ${c.client}`} className="h-16 w-auto max-w-[170px] rounded-md border bg-secondary p-2 object-contain" />
                     )}
                     <div>
                       {c.segment && <p className="eyebrow">{c.segment}</p>}
