@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import {
   NAV, TIMELINE, SKILLS, METRICS, SEGMENTS, CASE_STUDIES, EDUCATION, PARTNERSHIPS,
-  PARTNERSHIP_INFO, whatsappUrl, EMAIL, LINKEDIN, PHONE_DISPLAY, PHOTO_URL, RESUME_URL,
+  PARTNERSHIP_INFO, CERTIFICATIONS, whatsappUrl, EMAIL, LINKEDIN, PHONE_DISPLAY, PHOTO_URL, RESUME_URL,
 } from "@/content/site";
 
 const TITLE = "Marcelo Mozart | Gestor de Tráfego Pago Sênior — Meta Ads";
@@ -142,6 +142,14 @@ function Index() {
               Gestor de Tráfego Pago Sênior
               <span className="mt-3 block w-fit highlight-ink">Especialista em Meta Ads</span>
             </h1>
+            <ul className="reveal mt-8 flex flex-wrap gap-3">
+              {CERTIFICATIONS.map((c) => (
+                <li key={c} className="inline-flex items-center gap-2 rounded-full border border-ink-border bg-ink-foreground/5 px-4 py-2 text-sm font-semibold text-ink-foreground/90">
+                  <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-ink-accent" />
+                  {c}
+                </li>
+              ))}
+            </ul>
             <p className="reveal mt-8 max-w-2xl text-lg leading-relaxed text-ink-foreground/85">
               Atuo com marketing digital desde 2006 e com Meta Ads desde 2018, apoiando operações de aquisição de leads por meio de planejamento, execução, acompanhamento e otimização de campanhas.
             </p>

@@ -7,6 +7,12 @@ export const EMAIL = "mozart@marcelomozart.com.br";
 export const LINKEDIN = "https://www.linkedin.com/in/marcelo-mozart";
 export const PHONE_DISPLAY = "(51) 99966-6841";
 
+/** Selos exibidos no destaque inicial. */
+export const CERTIFICATIONS = [
+  "Gerente de tráfego certificado Meta",
+  "Tech Provider Meta",
+];
+
 /** Defina a URL da foto real quando disponível. Enquanto null, o espaço fica oculto na publicação. */
 export const PHOTO_URL: string | null = null;
 /** Defina o caminho do PDF real (ex.: "/marcelo-mozart-curriculo.pdf"). Enquanto null, o botão não aparece. */
