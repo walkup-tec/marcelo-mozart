@@ -182,7 +182,7 @@ function CaseCard({ study }: { study: CaseStudy }) {
             &times;
           </button>
           <figure onClick={(e) => e.stopPropagation()} className="max-h-full w-full max-w-5xl overflow-auto text-center">
-            <img src={current.src} alt={alt(current)} className="mx-auto block max-h-[85vh] min-w-[700px] rounded-lg bg-background object-contain md:min-w-0" />
+            <img src={current.src} alt={alt(current)} className="mx-auto block max-h-[85vh] min-w-[1400px] rounded-lg bg-background object-contain md:min-w-0" />
             <p aria-hidden className="mt-2 text-xs text-ink-muted md:hidden">Arraste para percorrer o print</p>
             {current.caption && (
               <figcaption className="mt-3 text-sm text-ink-muted">{current.caption}</figcaption>
