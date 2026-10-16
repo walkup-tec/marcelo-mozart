@@ -1,3 +1,6 @@
+import sinalVerdeLogo from "@/assets/sinal-verde-logo.png.asset.json";
+import sinalVerdePrint from "@/assets/sinal-verde-print.png.asset.json";
+
 // Todo o conteúdo do portfólio fica aqui para facilitar atualizações.
 export const WHATSAPP_NUMBER = "5551999666841";
 export const WHATSAPP_MESSAGE =
@@ -93,7 +96,22 @@ export type CaseStudy = {
 };
 
 /** Adicione apenas cases autorizados pelo cliente. Lista vazia = seção oculta. */
-export const CASE_STUDIES: CaseStudy[] = [];
+export const CASE_STUDIES: CaseStudy[] = [
+  {
+    client: "Sinal Verde",
+    clientLogo: sinalVerdeLogo.url,
+    segment: "Crédito pessoal · Consignado",
+    strategy: "Leads via WhatsApp · Otimização de CPA",
+    results: "Investimento diário de R$ 20,00 com 40 leads por dia.",
+    prints: [
+      {
+        src: sinalVerdePrint.url,
+        caption:
+          "Últimos 30 dias (16 de set a 15 de out de 2026) — 167 conversas iniciadas, R$ 17,27 por conversa.",
+      },
+    ],
+  },
+];
 
 export const EDUCATION = [
   { kind: "Formação acadêmica", title: "Análise e Desenvolvimento de Sistemas para Web", institution: "Faculdade Uninove/SP", period: "2018 – 2019", status: "Ensino superior incompleto", verifyUrl: null as string | null },

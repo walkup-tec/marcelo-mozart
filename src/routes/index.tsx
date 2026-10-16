@@ -283,7 +283,7 @@ function Index() {
                 <article key={`${c.client}-${i}`} className="rounded-lg border bg-card p-6 md:p-8">
                   <header className="flex flex-wrap items-center gap-4">
                     {c.clientLogo && (
-                      <img src={c.clientLogo} alt={`Logo ${c.client}`} className="h-16 w-auto max-w-[170px] rounded-md border bg-secondary p-2 object-contain" />
+                      <img src={c.clientLogo} alt={`Logo ${c.client}`} className="h-16 w-auto rounded-md object-contain" />
                     )}
                     <div>
                       {c.segment && <p className="eyebrow">{c.segment}</p>}
