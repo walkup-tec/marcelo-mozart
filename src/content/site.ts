@@ -14,8 +14,8 @@ export const CERTIFICATIONS = [
   "Tech Provider Meta",
 ];
 
-/** Defina a URL da foto real quando disponível. Enquanto null, o espaço fica oculto na publicação. */
-export const PHOTO_URL: string | null = null;
+/** Foto da seção Sobre. Arquivo em public/. Null oculta o espaço na publicação. */
+export const PHOTO_URL: string | null = "/marcelo-mozart.jpg";
 /** Defina o caminho do PDF real (ex.: "/marcelo-mozart-curriculo.pdf"). Enquanto null, o botão não aparece. */
 export const RESUME_URL: string | null = null;
 
