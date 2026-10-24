@@ -340,7 +340,7 @@ function Index() {
         {/* RESULTADOS */}
         <Section id="resultados" eyebrow="Resultados" title="Experiência prática em operações de Meta Ads"
           intro="Minha experiência envolve campanhas de geração de leads para diferentes perfis de público e operações comerciais, com atenção à estruturação, ao acompanhamento e à otimização das campanhas." alt>
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {METRICS.map((m) => (
               <div key={m.value} className="rounded-lg border bg-card p-7">
                 <p className="font-display text-3xl font-extrabold text-primary">{m.value}</p>

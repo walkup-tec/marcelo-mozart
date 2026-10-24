@@ -66,9 +66,10 @@ export const SKILLS = [
 ];
 
 export const METRICS = [
-  { value: "Desde 2018", caption: "Atuação profissional com Meta Ads." },
+  { value: "450 Contas Atendidas", caption: "Total de contas atendidas desde 2018." },
   { value: "Até 15 contas", caption: "Quantidade máxima de contas de anúncios administradas simultaneamente em sua experiência profissional." },
   { value: "Desde 2006", caption: "Experiência com ferramentas e operações de marketing digital." },
+  { value: "Desde 2018", caption: "Atuação profissional com Meta Ads." },
 ];
 
 export const SEGMENTS = ["Produtos financeiros e crédito", "Prestadores de serviços"];
