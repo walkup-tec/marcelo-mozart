@@ -221,7 +221,6 @@ function Index() {
             <p className="reveal font-display text-sm font-bold tracking-[0.25em] text-ink-muted">MARCELO MOZART</p>
             <h1 className="reveal mt-6 max-w-4xl text-4xl font-extrabold leading-[1.08] md:text-6xl">
               Gestor de Tráfego Pago Sênior
-              <span className="mt-3 block w-fit highlight-ink">Especialista em Meta Ads</span>
             </h1>
             <ul className="reveal mt-8 flex flex-wrap gap-3">
               {CERTIFICATIONS.map((c) => (
@@ -258,7 +257,7 @@ function Index() {
               </div>
             )}
             <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-muted-foreground md:order-1">
-              <p>Sou Marcelo Mozart, profissional de marketing digital com trajetória iniciada em 2006, quando atuava na implantação de operações de telemarketing integradas a ações de e-mail marketing.</p>
+              <p>Sou Marcelo Mozart, profissional de Marketing Digital e Tecnologia, com trajetória iniciada em 2006 na implementação de soluções que integravam canais de comunicação, ações de marketing e processos comerciais. Ao longo dessa experiência, participei de projetos voltados à modernização das operações de empresas de diferentes segmentos, conectando tecnologia, marketing e vendas para tornar seus processos mais eficientes.</p>
               <p>Desde 2018, trabalho com Meta Ads, desenvolvendo e gerenciando campanhas de mídia paga, especialmente para geração de leads.</p>
               <p>Minha experiência combina planejamento, execução operacional, acompanhamento de indicadores e organização de projetos.</p>
               <p>Atuo como prestador de serviços independente e busco parcerias com agências que precisam de um profissional experiente para integrar suas operações de tráfego pago.</p>

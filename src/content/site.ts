@@ -10,6 +10,7 @@ export const PHONE_DISPLAY = "(51) 99966-6841";
 
 /** Selos exibidos no destaque inicial. */
 export const CERTIFICATIONS = [
+  "Especialista em Meta Ads",
   "Gerente de tráfego certificado Meta",
   "Tech Provider Meta",
 ];
@@ -115,6 +116,7 @@ export const CASE_STUDIES: CaseStudy[] = [
 export const EDUCATION = [
   { kind: "Formação acadêmica", title: "Análise e Desenvolvimento de Sistemas para Web", institution: "Faculdade Uninove/SP", period: "2018 – 2019", status: "Ensino superior incompleto", verifyUrl: null as string | null },
   { kind: "Curso", title: "Gestão de Tráfego", institution: "Expert Agência de Marketing/SP", period: "2019", status: "Concluído com certificado", verifyUrl: null as string | null },
+  { kind: "Partner", title: "Tech Provider - META", institution: "Meta Platforms, Inc.", period: "2026", status: "Programa Ativo", verifyUrl: null as string | null },
 ];
 
 export const PARTNERSHIPS = [
