@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
   NAV, TIMELINE, SKILLS, METRICS, SEGMENTS, CASE_STUDIES, EDUCATION, PARTNERSHIPS,
-  PARTNERSHIP_INFO, CERTIFICATIONS, whatsappUrl, EMAIL, LINKEDIN, PHONE_DISPLAY, PHOTO_URL, RESUME_URL,
+  PARTNERSHIP_INFO, CERTIFICATIONS, whatsappUrl, EMAIL, LINKEDIN, PHONE_DISPLAY, PHOTO_URL, PHOTO_DESKTOP_URL, RESUME_URL,
   type CasePrint, type CaseStudy,
 } from "@/content/site";
 import { Button } from "@/components/ui/button";
@@ -183,18 +183,6 @@ function CaseCard({ study }: { study: CaseStudy }) {
           </button>
           <figure onClick={(e) => e.stopPropagation()} className="max-h-full w-full max-w-5xl overflow-auto text-center">
             <img src={current.src} alt={alt(current)} className="mx-auto block max-h-[85vh] min-w-[1400px] rounded-lg bg-background object-contain md:min-w-0" />
-            <p aria-hidden className="mt-2 text-xs text-ink-muted md:hidden">Arraste para percorrer o print</p>
-            {current.caption && (
-              <figcaption className="mt-3 text-sm text-ink-muted">{current.caption}</figcaption>
-            )}
-
-            {study.prints.length > 1 && (
-              <div className="mt-4 flex items-center justify-center gap-4">
-                <button type="button" onClick={() => setOpenIndex((i) => (i === null ? i : (i - 1 + study.prints.length) % study.prints.length))} aria-label="Print anterior" className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-border text-xl text-ink-foreground">&lsaquo;</button>
-                <span className="text-xs text-ink-muted">{(openIndex ?? 0) + 1} de {study.prints.length}</span>
-                <button type="button" onClick={() => setOpenIndex((i) => (i === null ? i : (i + 1) % study.prints.length))} aria-label="Próximo print" className="flex h-10 w-10 items-center justify-center rounded-full border border-ink-border text-xl text-ink-foreground">&rsaquo;</button>
-              </div>
-            )}
           </figure>
         </div>
       )}
@@ -202,6 +190,55 @@ function CaseCard({ study }: { study: CaseStudy }) {
   );
 }
 
+function CaseCarousel({ studies }: { studies: CaseStudy[] }) {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [index, setIndex] = useState(0);
+
+  const sync = () => {
+    const el = scrollerRef.current;
+    if (!el || el.clientWidth === 0) return;
+    const next = Math.round(el.scrollLeft / el.clientWidth);
+    setIndex(Math.min(Math.max(next, 0), studies.length - 1));
+  };
+
+  const go = (i: number) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    el.scrollTo({ left: i * el.clientWidth, behavior: "smooth" });
+  };
+
+  return (
+    <div className="mt-12">
+      <div
+        ref={scrollerRef}
+        onScroll={sync}
+        className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        aria-label="Cases de campanha"
+      >
+        {studies.map((study, i) => (
+          <div key={`${study.client}-${i}`} className="w-full shrink-0 snap-start">
+            <CaseCard study={study} />
+          </div>
+        ))}
+      </div>
+      {studies.length > 1 && (
+        <div className="mt-4 flex items-center justify-center gap-2" role="tablist" aria-label="Posição nos cases">
+          {studies.map((study, i) => (
+            <button
+              key={`${study.client}-marcador-${i}`}
+              type="button"
+              role="tab"
+              aria-selected={i === index}
+              aria-label={`${study.client}, card ${i + 1} de ${studies.length}`}
+              onClick={() => go(i)}
+              className={`h-1.5 rounded-full transition-all ${i === index ? "w-10 bg-primary" : "w-6 bg-border"}`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Index() {
   const showPhoto = PHOTO_URL || import.meta.env.DEV;
@@ -221,10 +258,11 @@ function Index() {
             <p className="reveal font-display text-sm font-bold tracking-[0.25em] text-ink-muted">MARCELO MOZART</p>
             <h1 className="reveal mt-6 max-w-4xl text-4xl font-extrabold leading-[1.08] md:text-6xl">
               Gestor de Tráfego Pago Sênior
+              <span className="mt-3 block w-fit highlight-ink">Especialista em Meta Ads</span>
             </h1>
             <ul className="reveal mt-8 flex flex-wrap gap-3">
               {CERTIFICATIONS.map((c) => (
-                <li key={c} className="inline-flex items-center gap-2 rounded-full border border-ink-border bg-ink-foreground/5 px-4 py-2 text-sm font-semibold text-ink-foreground/90">
+                <li key={c} className="inline-flex items-center gap-2 rounded-full border border-ink-accent bg-ink-foreground/5 px-4 py-2 text-sm font-semibold text-ink-foreground/90">
                   <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-ink-accent" />
                   {c}
                 </li>
@@ -248,7 +286,10 @@ function Index() {
             {showPhoto && (
               <div className="float-left mb-4 mr-5 w-[42%] max-w-[160px] md:float-none md:order-2 md:mb-0 md:mr-0 md:w-full md:max-w-[280px]">
                 {PHOTO_URL ? (
-                  <img src={PHOTO_URL} alt="Marcelo Mozart" className="aspect-[4/5] w-full rounded-lg object-cover" />
+                  <>
+                    <img src={PHOTO_URL} alt="Marcelo Mozart" className="aspect-[4/5] w-full rounded-lg object-cover md:hidden" />
+                    <img src={PHOTO_DESKTOP_URL ?? PHOTO_URL} alt="Marcelo Mozart" className="hidden aspect-[4/5] w-full rounded-lg object-cover md:block" />
+                  </>
                 ) : (
                   <div className="flex aspect-[4/5] w-full items-center justify-center rounded-lg border-2 border-dashed bg-secondary p-3 text-center text-[10px] leading-tight text-muted-foreground md:p-6 md:text-sm">
                     Foto temporária — aguardando fotografia oficial (visível apenas em desenvolvimento)
@@ -258,7 +299,7 @@ function Index() {
             )}
             <div className="max-w-2xl space-y-5 text-lg leading-relaxed text-muted-foreground md:order-1">
               <p>Sou Marcelo Mozart, profissional de Marketing Digital e Tecnologia, com trajetória iniciada em 2006 na implementação de soluções que integravam canais de comunicação, ações de marketing e processos comerciais. Ao longo dessa experiência, participei de projetos voltados à modernização das operações de empresas de diferentes segmentos, conectando tecnologia, marketing e vendas para tornar seus processos mais eficientes.</p>
-              <p>Desde 2018, trabalho com Meta Ads, desenvolvendo e gerenciando campanhas de mídia paga, especialmente para geração de leads.</p>
+              <p className="font-bold">Desde 2018, trabalho com Meta Ads, desenvolvendo e gerenciando campanhas de mídia paga, especialmente para geração de leads.</p>
               <p>Minha experiência combina planejamento, execução operacional, acompanhamento de indicadores e organização de projetos.</p>
               <p>Atuo como prestador de serviços independente e busco parcerias com agências que precisam de um profissional experiente para integrar suas operações de tráfego pago.</p>
               <p className="pt-2 text-base text-foreground">Novo Hamburgo, RS · Atuação 100% remota</p>
@@ -272,7 +313,7 @@ function Index() {
             {TIMELINE.map((t) => (
               <li key={t.org} className="relative pb-12 last:pb-0">
                 <span aria-hidden className={`absolute -left-[37px] top-1.5 h-3 w-3 rounded-full ring-4 ring-secondary md:-left-[53px] ${t.current ? "bg-primary" : "bg-muted-foreground/50"}`} />
-                <p className="font-display text-sm font-bold text-primary">{t.period}{t.current && <span className="ml-3 rounded-full bg-accent px-2.5 py-0.5 text-xs text-accent-foreground">Atual</span>}</p>
+                <p className="font-display text-sm font-bold text-primary">{t.period}{t.current && <span className="ml-3 rounded-full bg-accent px-2.5 py-0.5 text-xs text-accent-foreground">Encerrando</span>}</p>
                 <h3 className="mt-2 text-xl font-bold">{t.org}</h3>
                 <p className="mt-1 font-medium text-foreground/80">{t.role}</p>
                 <p className="mt-3 max-w-2xl leading-relaxed text-muted-foreground">{t.text}</p>
@@ -313,13 +354,7 @@ function Index() {
               {SEGMENTS.map((s) => <li key={s} className="rounded-full border bg-card px-4 py-2 text-sm">{s}</li>)}
             </ul>
           </div>
-          {CASE_STUDIES.length > 0 && (
-            <div className="mt-12 space-y-4">
-              {CASE_STUDIES.map((c, i) => (
-                <CaseCard key={`${c.client}-${i}`} study={c} />
-              ))}
-            </div>
-          )}
+          {CASE_STUDIES.length > 0 && <CaseCarousel studies={CASE_STUDIES} />}
 
         </Section>
 
@@ -330,7 +365,7 @@ function Index() {
               <article key={e.title} className="rounded-lg border bg-card p-7">
                 <p className="eyebrow">{e.kind}</p>
                 <h3 className="mt-3 text-xl font-bold">{e.title}</h3>
-                <p className="mt-2 text-muted-foreground">{e.institution} · {e.period}</p>
+                <p className="mt-2 text-muted-foreground">{e.institution} {"separator" in e ? e.separator : "·"} {e.period}</p>
                 <p className="mt-4 inline-block rounded-full bg-secondary px-3 py-1 text-xs font-medium">{e.status}</p>
                 {e.verifyUrl && <a href={e.verifyUrl} {...ext} className="ml-3 text-sm text-primary underline">Verificar</a>}
               </article>

@@ -101,9 +101,6 @@
 
 @utility highlight-ink {
   color: var(--color-ink-accent);
-  background-image: linear-gradient(to top, var(--ink-accent-soft) 0.3em, transparent 0.3em);
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
 }
 
 @utility reveal {

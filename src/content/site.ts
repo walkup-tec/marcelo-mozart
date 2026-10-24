@@ -10,13 +10,15 @@ export const PHONE_DISPLAY = "(51) 99966-6841";
 
 /** Selos exibidos no destaque inicial. */
 export const CERTIFICATIONS = [
-  "Especialista em Meta Ads",
-  "Gerente de tráfego certificado Meta",
+  "Gerente de tráfego Meta",
   "Tech Provider Meta",
+  "Developer | Vibe Coding",
 ];
 
 /** Foto da seção Sobre. Arquivo em public/. Null oculta o espaço na publicação. */
 export const PHOTO_URL: string | null = "/marcelo-mozart.jpg";
+/** Versão da foto usada no desktop. Se null, usa PHOTO_URL. */
+export const PHOTO_DESKTOP_URL: string | null = "/marcelo-mozart-desktop.jpg";
 /** Defina o caminho do PDF real (ex.: "/marcelo-mozart-curriculo.pdf"). Enquanto null, o botão não aparece. */
 export const RESUME_URL: string | null = null;
 
@@ -102,21 +104,38 @@ export const CASE_STUDIES: CaseStudy[] = [
     clientLogo: "/sinal-verde-logo.png",
     segment: "Crédito pessoal · Consignado",
     strategy: "Leads via WhatsApp · Otimização de CPA",
-    results: "Investimento diário de R$ 20,00 com 40 leads por dia.",
+    results: "Investimento diário inicial de R$ 20,00 com 40 leads por dia.",
     prints: [
       {
-        src: "/sinal-verde-print.png",
+        src: "/sinal-verde-indicadores.jpg",
         caption:
           "Últimos 30 dias (16 de set a 15 de out de 2026) — 167 conversas iniciadas, R$ 17,27 por conversa.",
       },
     ],
+  },
+  {
+    client: "Credilix",
+    clientLogo: "/credilix-logo.png",
+    segment: "Crédito consignado",
+    strategy: "Leads via WhatsApp · Otimização de CPA",
+    results: "Investimento diário inicial de R$ 20,00 com 60 leads por dia.",
+    prints: [{ src: "/credilix-indicadores.png" }],
+  },
+  {
+    client: "Marques",
+    clientLogo: "/marques-logo.png",
+    segment: "Crédito consignado",
+    strategy: "Leads via WhatsApp · Otimização de CPA",
+    results: "Investimento diário inicial de R$ 20,00 com 10 leads por dia. (Lead com alto valor de contrato)",
+    prints: [{ src: "/marques-indicadores.png" }],
   },
 ];
 
 export const EDUCATION = [
   { kind: "Formação acadêmica", title: "Análise e Desenvolvimento de Sistemas para Web", institution: "Faculdade Uninove/SP", period: "2018 – 2019", status: "Ensino superior incompleto", verifyUrl: null as string | null },
   { kind: "Curso", title: "Gestão de Tráfego", institution: "Expert Agência de Marketing/SP", period: "2019", status: "Concluído com certificado", verifyUrl: null as string | null },
-  { kind: "Partner", title: "Tech Provider - META", institution: "Meta Platforms, Inc.", period: "2026", status: "Programa Ativo", verifyUrl: null as string | null },
+  { kind: "Partner", title: "Tech Provider - META", institution: "Meta Platforms, Inc.", separator: "-", period: "2026", status: "Programa Ativo", verifyUrl: null as string | null },
+  { kind: "Certificado", title: "Certified Media Buying Professional", institution: "Meta Platforms, Inc.", period: "De 2019 a 2021", status: "Concluído", verifyUrl: null as string | null },
 ];
 
 export const PARTNERSHIPS = [
