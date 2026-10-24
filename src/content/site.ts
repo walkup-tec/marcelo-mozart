@@ -1,7 +1,5 @@
-import sinalVerdeLogo from "@/assets/sinal-verde-logo.png.asset.json";
-import sinalVerdePrint from "@/assets/sinal-verde-print.png.asset.json";
-
 // Todo o conteúdo do portfólio fica aqui para facilitar atualizações.
+// As imagens do case ficam em public/ para o site publicado servir sem o proxy da Lovable.
 export const WHATSAPP_NUMBER = "5551999666841";
 export const WHATSAPP_MESSAGE =
   "Olá, Marcelo! Gostaria de conversar sobre uma possível parceria PJ em gestão de tráfego Meta Ads.";
@@ -100,13 +98,13 @@ export type CaseStudy = {
 export const CASE_STUDIES: CaseStudy[] = [
   {
     client: "Sinal Verde",
-    clientLogo: sinalVerdeLogo.url,
+    clientLogo: "/sinal-verde-logo.png",
     segment: "Crédito pessoal · Consignado",
     strategy: "Leads via WhatsApp · Otimização de CPA",
     results: "Investimento diário de R$ 20,00 com 40 leads por dia.",
     prints: [
       {
-        src: sinalVerdePrint.url,
+        src: "/sinal-verde-print.png",
         caption:
           "Últimos 30 dias (16 de set a 15 de out de 2026) — 167 conversas iniciadas, R$ 17,27 por conversa.",
       },
